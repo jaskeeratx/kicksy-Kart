@@ -22,8 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: IndexedStack(index: currentPage, children: pages),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.grey.shade100,
         currentIndex: currentPage,
         iconSize: 35,
+        selectedFontSize: 0,
+        unselectedFontSize: 0,
         selectedItemColor: iconColor,
         unselectedItemColor: Colors.grey,
 

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kicksy_kart/global_variables.dart';
+import 'package:kicksy_kart/pages/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
   final Map<String, Object> product;
@@ -17,6 +19,20 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void onTap() {
+    Provider.of<CartProvider>(context, listen: false).addProduct({
+      'id': widget.product['id'],
+      'title': widget.product['title'],
+      'price': widget.product['price'],
+      'imageUrl': widget.product['imageUrl'],
+      'company': widget.product['company'],
+      'sizes': selectedSize,
+    });
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Item added Successfully')));
   }
 
   @override
@@ -92,13 +108,13 @@ class _ProductScreenState extends State<ProductScreen> {
                       height: 50,
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text('Add to cart'),
+                        onPressed: onTap,
                         style: ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(
                             Colors.amberAccent,
                           ),
                         ),
+                        child: Text('Add to cart'),
                       ),
                     ),
                   ),
